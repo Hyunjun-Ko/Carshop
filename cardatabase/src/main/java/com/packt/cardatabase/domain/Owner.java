@@ -1,5 +1,7 @@
 package com.packt.cardatabase.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
 
     @Id
@@ -14,7 +17,7 @@ public class Owner {
     private long ownerid;
     private String firstname, lastname;
 
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Car> cars;
 
