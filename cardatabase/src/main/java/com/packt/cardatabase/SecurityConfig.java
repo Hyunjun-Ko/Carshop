@@ -87,6 +87,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
+                .csrf(Customizer.withDefaults())
+                .authorizeHttpRequests((authorizeRequests) ->
+                        authorizeRequests.anyRequest().permitAll());
+        /*
+        http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sessionManagementCustomizer -> sessionManagementCustomizer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -108,7 +113,7 @@ public class SecurityConfig {
                 // 예: GET /api/cars Authorization 헤더 : JWT 값
                 .addFilterBefore(authenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
-
+        */
         return http.build();
     }
 
