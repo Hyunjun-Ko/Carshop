@@ -86,11 +86,7 @@ public class SecurityConfig {
     // 또한 스프링 시큐리티가 세션을 생성하지 않도록 정의하므로 csrf를 비활성화할 수 있다.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
-                .authorizeHttpRequests((authorizeRequests) ->
-                        authorizeRequests.anyRequest().permitAll());
-        /*
+
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sessionManagementCustomizer -> sessionManagementCustomizer
@@ -113,7 +109,7 @@ public class SecurityConfig {
                 // 예: GET /api/cars Authorization 헤더 : JWT 값
                 .addFilterBefore(authenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
-        */
+
         return http.build();
     }
 
